@@ -16,7 +16,6 @@ public class Section implements NamedElement, Visitable {
      * Beat per minute
      */
     private float bpm;
-    private List<Bar> bars;
 
     @Override
     public void setName(final String name) {
