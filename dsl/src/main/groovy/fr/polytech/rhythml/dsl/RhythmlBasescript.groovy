@@ -75,10 +75,6 @@ abstract class RhythmlBasescript extends Script {
         }]
     }
 
-    def song(songName) {
-        ((RhythmlBinding) this.getBinding()).getRhythmlModel().createTrack(name)
-    }
-
 // export name
     def export(String name) {
         println(((RhythmlBinding) this.getBinding()).getRhythmlModel().generateCode(name).toString())
