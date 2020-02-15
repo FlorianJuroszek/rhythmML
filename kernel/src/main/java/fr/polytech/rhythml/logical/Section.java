@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class Section implements NamedElement, Visitable {
     private String name;
-    private List<Bar> bars;
 
     /**
      * Beat per minute
@@ -30,6 +29,6 @@ public class Section implements NamedElement, Visitable {
 
     @Override
     public void accept(Visitor visitor) {
-
+        visitor.visit(this);
     }
 }

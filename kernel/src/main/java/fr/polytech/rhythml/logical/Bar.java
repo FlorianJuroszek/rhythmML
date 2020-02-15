@@ -4,9 +4,12 @@ import fr.polytech.rhythml.NamedElement;
 import fr.polytech.rhythml.generator.Visitable;
 import fr.polytech.rhythml.generator.Visitor;
 
+import java.util.List;
+
 public class Bar implements NamedElement, Visitable {
     private String name;
-
+    private int beats;
+    private List<Note> notes;
 
     @Override
     public void setName(String name) {
@@ -16,6 +19,22 @@ public class Bar implements NamedElement, Visitable {
     @Override
     public String getName() {
         return this.name;
+    }
+
+    public int getBeats() {
+        return beats;
+    }
+
+    public void setBeats(int beats) {
+        this.beats = beats;
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
     }
 
     @Override
