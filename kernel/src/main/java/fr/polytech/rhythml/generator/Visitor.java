@@ -1,10 +1,7 @@
 package fr.polytech.rhythml.generator;
 
 import fr.polytech.rhythml.Song;
-import fr.polytech.rhythml.logical.Bar;
-import fr.polytech.rhythml.logical.Note;
-import fr.polytech.rhythml.logical.Section;
-import fr.polytech.rhythml.logical.Track;
+import fr.polytech.rhythml.logical.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +20,8 @@ public abstract class Visitor<T> {
     public abstract void visit(Bar bar);
 
     public abstract void visit(Section section);
+
+    public abstract void visit(NotePosition notePosition);
 
     public abstract void visit(Note note);
 
