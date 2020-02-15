@@ -1,10 +1,7 @@
 package fr.polytech.rhythml.generator;
 
 import fr.polytech.rhythml.Song;
-import fr.polytech.rhythml.logical.Bar;
-import fr.polytech.rhythml.logical.Note;
-import fr.polytech.rhythml.logical.Section;
-import fr.polytech.rhythml.logical.Track;
+import fr.polytech.rhythml.logical.*;
 
 /**
  * Visitor generating midi file content
@@ -35,6 +32,11 @@ public class ToWiring extends Visitor<StringBuffer> {
 
     @Override
     public void visit(Section section) {
+
+    }
+
+    @Override
+    public void visit(NotePosition notePosition) {
 
     }
 
