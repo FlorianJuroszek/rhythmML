@@ -8,8 +8,10 @@ public class NotePosition implements Visitable {
     private Integer denominator;
 
     public NotePosition(String fraction) {
-        this.numerator = Integer.valueOf(fraction.split("/")[0]);
-        this.denominator = Integer.valueOf(fraction.split("/")[1]);
+        String[] result = fraction.split("/");
+        System.out.println("result : " + result.length + " " + result[0]);
+        this.numerator = Integer.valueOf(result[0]);
+        this.denominator = Integer.valueOf(result[1]);
     }
 
     public Integer getNumerator() {

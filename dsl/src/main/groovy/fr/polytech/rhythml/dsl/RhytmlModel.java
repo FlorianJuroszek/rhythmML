@@ -38,6 +38,7 @@ public class RhytmlModel {
         Bar bar = new Bar();
         bar.setName(name);
         bar.setNotes(new ArrayList<Note>());
+        this.binding.setVariable(name, bar);
         return bar;
     }
 

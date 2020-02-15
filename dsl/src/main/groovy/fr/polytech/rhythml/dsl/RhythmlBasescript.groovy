@@ -19,39 +19,43 @@ abstract class RhythmlBasescript extends Script {
 
         def closure
         closure = { noteName ->
-            ["on beat": { beat ->
-                ["on quaver": { quaver ->
-                    ["on semiquaver": { semiquaver ->
+            [beat: { beat ->
+                [quaver: { quaver ->
+                    quaver = quaver instanceof String ? quaver : (String) quaver
+                    if (quaver != "none") {
+                        [semiquaver: { semiquaver ->
+                            semiquaver = semiquaver instanceof String ? semiquaver : (String) semiquaver
+                            if (semiquaver != "none") {
+                                bar.getNotes().add(
+                                        ((RhythmlBinding) this.getBinding()).getRhythmlModel().createNote(
+                                                noteName instanceof String ? noteName : (String) noteName,
+                                                beat instanceof String ? beat : (String) beat,
+                                                quaver instanceof String ? quaver : (String) quaver,
+                                                semiquaver instanceof String ? semiquaver : (String) semiquaver))
+                                [and: closure]
+                            } else {
+                                bar.getNotes().add(
+                                        ((RhythmlBinding) this.getBinding()).getRhythmlModel().createNote(
+                                                noteName instanceof String ? noteName : (String) noteName,
+                                                beat instanceof String ? beat : (String) beat,
+                                                quaver instanceof String ? quaver : (String) quaver,
+                                                "1/1"))
+                                [and: closure]
+                            }
+                        }]
+                    } else {
                         bar.getNotes().add(
                                 ((RhythmlBinding) this.getBinding()).getRhythmlModel().createNote(
                                         noteName instanceof String ? noteName : (String) noteName,
                                         beat instanceof String ? beat : (String) beat,
-                                        quaver instanceof String ? quaver : (String) quaver,
-                                        semiquaver instanceof String ? semiquaver : (String) semiquaver))
+                                        "1/1",
+                                        "1/1"))
                         [and: closure]
-                    }]
-                    ["no semiquaver": { ->
-                        bar.getNotes().add(
-                                ((RhythmlBinding) this.getBinding()).getRhythmlModel().createNote(
-                                        noteName instanceof String ? noteName : (String) noteName,
-                                        beat instanceof String ? beat : (String) beat,
-                                        quaver instanceof String ? quaver : (String) quaver,
-                                        "0"))
-                        [and: closure]
-                    }]
-                }]
-                ["no quaver": { ->
-                    bar.getNotes().add(
-                            ((RhythmlBinding) this.getBinding()).getRhythmlModel().createNote(
-                                    noteName instanceof String ? noteName : (String) noteName,
-                                    beat instanceof String ? beat : (String) beat,
-                                    "0",
-                                    "0"))
-                    [and: closure]
+                    }
                 }]
             }]
         }
-        [withNotes: closure]
+        ["with notes:": closure]
     }
 
     def forTrack(trackName) {
@@ -69,6 +73,10 @@ abstract class RhythmlBasescript extends Script {
             track.setSection(sectionName instanceof String ? (Section) ((RhythmlBinding) this.getBinding()).getVariable(sectionName) : (Section) sectionName)
             [withBars: closure]
         }]
+    }
+
+    def song(songName) {
+        ((RhythmlBinding) this.getBinding()).getRhythmlModel().createTrack(name)
     }
 
 // export name

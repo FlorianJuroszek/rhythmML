@@ -35,11 +35,11 @@ class RhythmlDSL {
             tokensWhitelist = []
             //types allowed to be used  (including primitive types)
             constantTypesClassesWhiteList = [
-                    int, Integer, Number, Integer.TYPE, String, Object, float
+                    int, Integer, Number, Integer.TYPE, String, Object
             ]
             //classes who are allowed to be receivers of method calls
             receiversClassesWhiteList = [
-                    int, Number, Integer, String, Object, float
+                    int, Number, Integer, String, Object
             ]
         }
 

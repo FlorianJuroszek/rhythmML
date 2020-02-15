@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class RhythmlBinding extends Binding {
     private Script script;
-
     private RhytmlModel model;
 
     public RhythmlBinding() {
