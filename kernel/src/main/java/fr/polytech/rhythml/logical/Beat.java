@@ -6,17 +6,11 @@ import fr.polytech.rhythml.generator.Visitor;
 
 import java.util.List;
 
-/**
- * Musical section model
- */
-public class Section implements NamedElement, Visitable {
-    private String name;
-    private List<Bar> bars;
+public class Beat implements Visitable, NamedElement {
 
-    /**
-     * Beat per minute
-     */
-    private float bpm;
+    private String name;
+
+    private List<Beat> quavers;
 
     @Override
     public void setName(final String name) {
@@ -29,7 +23,7 @@ public class Section implements NamedElement, Visitable {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-
+    public void accept(final Visitor visitor) {
+        visitor.visit(this);
     }
 }
