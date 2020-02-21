@@ -10,7 +10,7 @@ class RhythmlDSL {
 
     RhythmlDSL() {
         binding = new RhythmlBinding()
-        binding.setRhythmlModel(new RhytmlModel(binding));
+        binding.setRhythmlModel(new RhytmlModel(binding))
         configuration = getDSLConfiguration()
         configuration.setScriptBaseClass("fr.polytech.rhythml.dsl.RhythmlBasescript")
         shell = new GroovyShell(configuration)

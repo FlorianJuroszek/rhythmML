@@ -9,7 +9,6 @@ public class NotePosition implements Visitable {
 
     public NotePosition(String fraction) {
         String[] result = fraction.split("/");
-        System.out.println("result : " + result.length + " " + result[0]);
         this.numerator = Integer.valueOf(result[0]);
         this.denominator = Integer.valueOf(result[1]);
     }
