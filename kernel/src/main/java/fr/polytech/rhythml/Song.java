@@ -10,7 +10,8 @@ import java.util.List;
 /**
  * Song main model
  */
-public class Song implements NamedElement, Visitable {
+public class
+Song implements NamedElement, Visitable {
 
     private String name;
     private List<Track> tracks;
