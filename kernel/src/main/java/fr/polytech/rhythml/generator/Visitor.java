@@ -17,11 +17,7 @@ public abstract class Visitor<T> {
 
     public abstract void visit(Track track);
 
-    public abstract void visit(Bar bar);
-
     public abstract void visit(Section section);
-
-    public abstract void visit(NotePosition notePosition);
 
     public abstract void visit(Note note);
 

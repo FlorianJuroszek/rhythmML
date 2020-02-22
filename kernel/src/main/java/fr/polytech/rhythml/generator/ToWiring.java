@@ -8,9 +8,7 @@ import org.jfugue.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.Key;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -55,11 +53,6 @@ public class ToWiring extends Visitor<StringBuffer> {
     }
 
     @Override
-    public void visit(Bar bar) {
-
-    }
-
-    @Override
     public void visit(Note note) {
 
     }
@@ -70,16 +63,11 @@ public class ToWiring extends Visitor<StringBuffer> {
     }
 
     @Override
-    public void visit(NotePosition notePosition) {
-        //
-    }
-
-    @Override
     public void visit(Track track) {
         StringBuilder stringBuilder = new StringBuilder();
 
         // For now we consider one pattern by track
-        stringBuilder.append(
+        /*stringBuilder.append(
                 String.format("V%d ", patternList.size()+1)
         );
 
@@ -93,7 +81,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
             // Clean version
             bar.accept(this);
-        }
+        }*/
 
         // MOCK
         stringBuilder.append(String.format("%d", patternList.size()+1));

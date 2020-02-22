@@ -11,11 +11,15 @@ import java.util.List;
  */
 public class Section implements NamedElement, Visitable {
     private String name;
+    private List<Note> notes;
 
-    /**
-     * Beat per minute
-     */
-    private float bpm;
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
 
     @Override
     public void setName(final String name) {

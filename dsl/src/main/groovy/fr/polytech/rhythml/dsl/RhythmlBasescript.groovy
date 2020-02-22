@@ -1,6 +1,6 @@
 package fr.polytech.rhythml.dsl
 
-import fr.polytech.rhythml.logical.Bar
+
 import fr.polytech.rhythml.logical.Section
 import fr.polytech.rhythml.logical.Track
 
@@ -14,7 +14,7 @@ abstract class RhythmlBasescript extends Script {
         ((RhythmlBinding) this.getBinding()).getRhythmlModel().createSection(name)
     }
 
-    def bar(String name) {
+    /*def bar(String name) {
         Bar bar = ((RhythmlBinding) this.getBinding()).getRhythmlModel().createBar(name)
 
         def closure
@@ -56,7 +56,7 @@ abstract class RhythmlBasescript extends Script {
             }]
         }
         ["with notes:": closure]
-    }
+    }*/
 
     def forTrack(trackName) {
         Track track = trackName instanceof String ? (Track) ((RhythmlBinding) this.getBinding()).getVariable(trackName) : (Track) trackName
@@ -65,7 +65,7 @@ abstract class RhythmlBasescript extends Script {
         closure = { barName ->
             ["^": { repeat ->
                 track.getBars().put(
-                        barName instanceof String ? (Bar) ((RhythmlBinding) this.getBinding()).getVariable(barName) : (Bar) barName,
+                        /*barName instanceof String ? (Bar) ((RhythmlBinding) this.getBinding()).getVariable(barName) : (Bar) barName,*/
                         repeat instanceof String ? (Integer) ((RhythmlBinding) this.getBinding()).getVariable(repeat) : (Integer) repeat)
             }]
         }

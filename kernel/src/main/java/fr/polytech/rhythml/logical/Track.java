@@ -5,11 +5,12 @@ import fr.polytech.rhythml.generator.Visitable;
 import fr.polytech.rhythml.generator.Visitor;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Track implements NamedElement, Visitable {
     private String name;
-    private Section section;
-    private HashMap<Bar, Integer> bars;
+    private List<Section> sections;
+    private float bpm;
 
     @Override
     public String getName() {
@@ -21,20 +22,20 @@ public class Track implements NamedElement, Visitable {
         this.name = name;
     }
 
-    public Section getSection() {
-        return section;
+    public float getBpm() {
+        return bpm;
     }
 
-    public void setSection(Section section) {
-        this.section = section;
+    public void setBpm(float bpm) {
+        this.bpm = bpm;
     }
 
-    public HashMap<Bar, Integer> getBars() {
-        return bars;
+    public List<Section> getSections() {
+        return sections;
     }
 
-    public void setBars(HashMap<Bar, Integer> bars) {
-        this.bars = bars;
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
     }
 
     @Override

@@ -6,9 +6,8 @@ import fr.polytech.rhythml.generator.Visitor;
 
 public class Note implements NamedElement, Visitable {
     private String name;
-    private NotePosition beat;
-    private NotePosition quaver;
-    private NotePosition semiquaver;
+    private String duration;
+    private int repetition;
 
     @Override
     public void setName(String name) {
@@ -20,28 +19,20 @@ public class Note implements NamedElement, Visitable {
         return this.name;
     }
 
-    public NotePosition getBeat() {
-        return beat;
+    public String getDuration() {
+        return duration;
     }
 
-    public void setBeat(NotePosition beat) {
-        this.beat = beat;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
-    public NotePosition getQuaver() {
-        return quaver;
+    public int getRepetition() {
+        return repetition;
     }
 
-    public void setQuaver(NotePosition quaver) {
-        this.quaver = quaver;
-    }
-
-    public NotePosition getSemiquaver() {
-        return semiquaver;
-    }
-
-    public void setSemiquaver(NotePosition semiquaver) {
-        this.semiquaver = semiquaver;
+    public void setRepetition(int repetition) {
+        this.repetition = repetition;
     }
 
     @Override

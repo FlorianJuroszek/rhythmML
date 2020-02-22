@@ -15,7 +15,6 @@ Song implements NamedElement, Visitable {
 
     private String name;
     private List<Track> tracks;
-    private List<Section> sections;
 
     public void accept(final Visitor visitor) {
         visitor.visit(this);
@@ -37,11 +36,4 @@ Song implements NamedElement, Visitable {
         this.tracks = tracks;
     }
 
-    public List<Section> getSections() {
-        return sections;
-    }
-
-    public void setSections(List<Section> sections) {
-        this.sections = sections;
-    }
 }
