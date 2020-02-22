@@ -11,6 +11,7 @@ public class Track implements NamedElement, Visitable {
     private String name;
     private List<Section> sections;
     private float bpm;
+    private Instrument instrument;
 
     @Override
     public String getName() {
@@ -20,6 +21,14 @@ public class Track implements NamedElement, Visitable {
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Instrument getInstrument() {
+        return instrument;
+    }
+
+    public void setInstrument(Instrument instrument) {
+        this.instrument = instrument;
     }
 
     public float getBpm() {

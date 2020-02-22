@@ -4,17 +4,15 @@ import fr.polytech.rhythml.NamedElement;
 import fr.polytech.rhythml.generator.Visitable;
 import fr.polytech.rhythml.generator.Visitor;
 
-public class Note implements NamedElement, Visitable {
+public class Note {
     private String name;
     private String duration;
-    private int repetition;
+    private Integer repetition;
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }
 
-    @Override
     public String getName() {
         return this.name;
     }
@@ -27,16 +25,11 @@ public class Note implements NamedElement, Visitable {
         this.duration = duration;
     }
 
-    public int getRepetition() {
+    public Integer getRepetition() {
         return repetition;
     }
 
-    public void setRepetition(int repetition) {
+    public void setRepetition(Integer repetition) {
         this.repetition = repetition;
-    }
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
     }
 }

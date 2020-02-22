@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Musical section model
  */
-public class Section implements NamedElement, Visitable {
+public class Section {
     private String name;
     private List<Note> notes;
 
@@ -21,18 +21,11 @@ public class Section implements NamedElement, Visitable {
         this.notes = notes;
     }
 
-    @Override
     public void setName(final String name) {
         this.name = name;
     }
 
-    @Override
     public String getName() {
         return this.name;
-    }
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
     }
 }

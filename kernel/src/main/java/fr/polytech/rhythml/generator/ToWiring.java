@@ -53,43 +53,34 @@ public class ToWiring extends Visitor<StringBuffer> {
     }
 
     @Override
-    public void visit(Note note) {
-
-    }
-
-    @Override
-    public void visit(Section section) {
-
-    }
-
-    @Override
     public void visit(Track track) {
         StringBuilder stringBuilder = new StringBuilder();
 
         // For now we consider one pattern by track
-        /*stringBuilder.append(
-                String.format("V%d ", patternList.size()+1)
+        // Voice value will be set to 9 if the instrument is Drums
+        stringBuilder.append(
+                String.format("V%d ", track.getInstrument().value)
         );
 
-        for (Bar bar : track.getBars().keySet()) {
-            // Dirty version
-            for (Note note : bar.getNotes()) {
-                stringBuilder.append(
-                        String.format("%s%s ", note.getName(), this.getNoteDuration(note))
-                );
+        for (Section section : track.getSections()) {
+            for (Note note : section.getNotes()) {
+                if (note.getRepetition() != null) {
+                    for (int i = 0; i < note.getRepetition(); i++) {
+                        stringBuilder.append(
+                                String.format("%s%s ", note.getName(), note.getDuration())
+                        );
+                    }
+                } else {
+                    stringBuilder.append(
+                            String.format("%s%s ", note.getName(), note.getDuration())
+                    );
+                }
             }
-
-            // Clean version
-            bar.accept(this);
-        }*/
+        }
 
         // MOCK
         stringBuilder.append(String.format("%d", patternList.size()+1));
         patternList.add(new Pattern(stringBuilder.toString()));
-    }
-
-    private String getNoteDuration(Note note) {
-        return "q";
     }
 
     private void write(final String s) {

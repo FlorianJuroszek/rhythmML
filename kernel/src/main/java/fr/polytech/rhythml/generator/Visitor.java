@@ -17,9 +17,9 @@ public abstract class Visitor<T> {
 
     public abstract void visit(Track track);
 
-    public abstract void visit(Section section);
+    /*public abstract void visit(Section section);
 
-    public abstract void visit(Note note);
+    public abstract void visit(Note note);*/
 
     /***********************
      ** Helper mechanisms **
