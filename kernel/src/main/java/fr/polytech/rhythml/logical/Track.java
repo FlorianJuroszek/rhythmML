@@ -4,7 +4,6 @@ import fr.polytech.rhythml.NamedElement;
 import fr.polytech.rhythml.generator.Visitable;
 import fr.polytech.rhythml.generator.Visitor;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class Track implements NamedElement, Visitable {

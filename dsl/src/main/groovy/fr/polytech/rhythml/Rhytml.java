@@ -3,11 +3,6 @@ package fr.polytech.rhythml;
 import fr.polytech.rhythml.dsl.RhythmlDSL;
 
 import java.io.File;
-import java.io.IOException;
-
-import org.jfugue.*;
-
-import javax.sound.midi.InvalidMidiDataException;
 
 public class Rhytml {
     public static void main(String[] args) {

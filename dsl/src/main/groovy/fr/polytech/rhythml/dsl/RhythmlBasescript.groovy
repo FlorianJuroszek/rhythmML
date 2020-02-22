@@ -1,78 +1,47 @@
 package fr.polytech.rhythml.dsl
 
-
+import fr.polytech.rhythml.logical.Note
 import fr.polytech.rhythml.logical.Section
-import fr.polytech.rhythml.logical.Track
 
 abstract class RhythmlBasescript extends Script {
 
-    def track(String name) {
-        ((RhythmlBinding) this.getBinding()).getRhythmlModel().createTrack(name)
+    def song(String name) {
+
     }
 
-    def section(String name) {
-        ((RhythmlBinding) this.getBinding()).getRhythmlModel().createSection(name)
-    }
-
-    /*def bar(String name) {
-        Bar bar = ((RhythmlBinding) this.getBinding()).getRhythmlModel().createBar(name)
+    def instrument(String name) {
+        List<Section> sections = new ArrayList<>()
+        ((RhythmlBinding) this.getBinding()).getRhythmlModel().createTrack(name, sections)
 
         def closure
-        closure = { noteName ->
-            [beat: { beat ->
-                [quaver: { quaver ->
-                    quaver = quaver instanceof String ? quaver : (String) quaver
-                    if (quaver != "none") {
-                        [semiquaver: { semiquaver ->
-                            semiquaver = semiquaver instanceof String ? semiquaver : (String) semiquaver
-                            if (semiquaver != "none") {
-                                bar.getNotes().add(
-                                        ((RhythmlBinding) this.getBinding()).getRhythmlModel().createNote(
-                                                noteName instanceof String ? noteName : (String) noteName,
-                                                beat instanceof String ? beat : (String) beat,
-                                                quaver instanceof String ? quaver : (String) quaver,
-                                                semiquaver instanceof String ? semiquaver : (String) semiquaver))
-                                [and: closure]
-                            } else {
-                                bar.getNotes().add(
-                                        ((RhythmlBinding) this.getBinding()).getRhythmlModel().createNote(
-                                                noteName instanceof String ? noteName : (String) noteName,
-                                                beat instanceof String ? beat : (String) beat,
-                                                quaver instanceof String ? quaver : (String) quaver,
-                                                "1/1"))
-                                [and: closure]
+        closure =
+                { sectionName ->
+                    [
+                            notes: { noteList ->
+                                Section section = ((RhythmlBinding) this.getBinding()).getRhythmlModel().createSection(
+                                        sectionName instanceof String ? sectionName : (String) sectionName,
+                                        buildNoteList(noteList instanceof String ? noteList : (String) noteList)
+                                )
+                                sections.add(section)
+                                [section: closure]
                             }
-                        }]
-                    } else {
-                        bar.getNotes().add(
-                                ((RhythmlBinding) this.getBinding()).getRhythmlModel().createNote(
-                                        noteName instanceof String ? noteName : (String) noteName,
-                                        beat instanceof String ? beat : (String) beat,
-                                        "1/1",
-                                        "1/1"))
-                        [and: closure]
-                    }
-                }]
-            }]
-        }
-        ["with notes:": closure]
-    }*/
+                    ]
+                }
+        [section: closure]
+    }
 
-    def forTrack(trackName) {
-        Track track = trackName instanceof String ? (Track) ((RhythmlBinding) this.getBinding()).getVariable(trackName) : (Track) trackName
-
-        def closure
-        closure = { barName ->
-            ["^": { repeat ->
-                track.getBars().put(
-                        /*barName instanceof String ? (Bar) ((RhythmlBinding) this.getBinding()).getVariable(barName) : (Bar) barName,*/
-                        repeat instanceof String ? (Integer) ((RhythmlBinding) this.getBinding()).getVariable(repeat) : (Integer) repeat)
-            }]
+    static def buildNoteList(String notesString) {
+        String[] noteFakeList = notesString.split(" ")
+        List<Note> noteList = new ArrayList<>()
+        for (String item : noteFakeList) {
+            String[] repeat = item.split("x")
+            if (repeat.length > 1) {
+                noteList.get(noteList.size() - 1).setRepetition(Integer.valueOf(repeat[1]))
+            } else {
+                noteList.add(new Note(item, "i", 1))
+            }
         }
-        [section: { sectionName ->
-            track.setSection(sectionName instanceof String ? (Section) ((RhythmlBinding) this.getBinding()).getVariable(sectionName) : (Section) sectionName)
-            [withBars: closure]
-        }]
+        return noteList
     }
 
 // export name
@@ -93,5 +62,4 @@ abstract class RhythmlBasescript extends Script {
             println "Run method is disabled"
         }
     }
-
 }

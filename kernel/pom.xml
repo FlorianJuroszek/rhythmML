@@ -12,7 +12,7 @@
         <dependency>
             <groupId>lib.external</groupId>
             <artifactId>jfugue</artifactId>
-            <version>1.0</version>
+            <version>4.1</version>
             <scope>system</scope>
             <systemPath>${basedir}/jfugue-4.1.jar</systemPath>
         </dependency>

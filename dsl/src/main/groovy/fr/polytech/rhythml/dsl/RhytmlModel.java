@@ -7,7 +7,6 @@ import fr.polytech.rhythml.logical.*;
 import groovy.lang.Binding;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class RhytmlModel {
@@ -19,17 +18,22 @@ public class RhytmlModel {
         this.binding = binding;
     }
 
-    public void createTrack(String name) {
+    public void createTrack(String name, List<Section> sections) {
         Track track = new Track();
         track.setName(name);
-        //track.setBars(new HashMap<Bar, Integer>());
+        //FIXME manual for now but will change later
+        track.setBpm(120);
+        track.setSections(sections);
+        track.setInstrument(Instrument.valueOf(name));
+        this.trackList.add(track);
         this.binding.setVariable(name, track);
     }
 
-    public void createSection(String name) {
+    public Section createSection(String name, List<Note> notes) {
         Section section = new Section();
         section.setName(name);
-        this.binding.setVariable(name, section);
+        section.setNotes(notes);
+        return section;
     }
 
     public Note createNote(String name, String beat, String quaver, String semiquaver) {

@@ -1,13 +1,18 @@
 package fr.polytech.rhythml.logical;
 
-import fr.polytech.rhythml.NamedElement;
-import fr.polytech.rhythml.generator.Visitable;
-import fr.polytech.rhythml.generator.Visitor;
-
 public class Note {
     private String name;
     private String duration;
     private Integer repetition;
+
+    public Note() {
+    }
+
+    public Note(String name, String duration, Integer repetition) {
+        this.name = name;
+        this.duration = duration;
+        this.repetition = repetition;
+    }
 
     public void setName(String name) {
         this.name = name;

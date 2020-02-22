@@ -2,9 +2,9 @@ package fr.polytech.rhythml.generator;
 
 import fr.polytech.rhythml.Song;
 import fr.polytech.rhythml.logical.*;
-
 import fr.polytech.rhythml.logical.Note;
-import org.jfugue.*;
+import org.jfugue.Pattern;
+import org.jfugue.Player;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,7 +79,7 @@ public class ToWiring extends Visitor<StringBuffer> {
         }
 
         // MOCK
-        stringBuilder.append(String.format("%d", patternList.size()+1));
+        stringBuilder.append(String.format("%d", patternList.size() + 1));
         patternList.add(new Pattern(stringBuilder.toString()));
     }
 
