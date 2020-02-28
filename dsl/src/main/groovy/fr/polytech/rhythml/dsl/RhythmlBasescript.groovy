@@ -20,7 +20,7 @@ abstract class RhythmlBasescript extends Script {
                             notes: { noteList ->
                                 Section section = ((RhythmlBinding) this.getBinding()).getRhythmlModel().createSection(
                                         sectionName instanceof String ? sectionName : (String) sectionName,
-                                        buildNoteList(noteList instanceof String ? noteList : (String) noteList)
+                                        buildNoteList(noteList instanceof String ? noteList : (String) noteList, name)
                                 )
                                 sections.add(section)
                                 [section: closure]
@@ -30,13 +30,34 @@ abstract class RhythmlBasescript extends Script {
         [section: closure]
     }
 
-    static def buildNoteList(String notesString) {
+    static def buildNoteList(String notesString, String instrumentName) {
         String[] noteFakeList = notesString.split(" ")
         List<Note> noteList = new ArrayList<>()
         for (String item : noteFakeList) {
-            String[] repeat = item.split("x")
+            if (instrumentName == "Drums") {
+                String[] sameTimeNotes = item.split("\\+")
+                if (sameTimeNotes.length > 0) {
+                    item = ""
+                    for (int i = 0; i < sameTimeNotes.length; i++) {
+                        sameTimeNotes[i] = "[" + sameTimeNotes[i] + "]"
+                        if (i < sameTimeNotes.length - 1) {
+                            item += sameTimeNotes[i] + "+"
+                        } else {
+                            item += sameTimeNotes[i]
+                        }
+                    }
+                } else {
+                    item = "[" + item + "]"
+                }
+            }
+            String[] repeat = item.split("\\*")
             if (repeat.length > 1) {
-                noteList.get(noteList.size() - 1).setRepetition(Integer.valueOf(repeat[1]))
+                int repetition = 1
+                if (instrumentName == "Drums") {
+                    noteList.get(noteList.size() - 1).setRepetition(Integer.valueOf(repeat[1].substring(0, repeat[1].length() - 1)))
+                } else {
+                    noteList.get(noteList.size() - 1).setRepetition(Integer.valueOf(repeat[1]))
+                }
             } else {
                 noteList.add(new Note(item, "i", 1))
             }
