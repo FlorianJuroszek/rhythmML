@@ -13,16 +13,17 @@ abstract class RhythmlBasescript extends Script {
         List<Section> sections = new ArrayList<>()
         ((RhythmlBinding) this.getBinding()).getRhythmlModel().createTrack(name, sections)
 
+        def sectionN
         def closure
         closure =
                 { sectionName ->
                     [
                             notes: { noteList ->
-                                Section section = ((RhythmlBinding) this.getBinding()).getRhythmlModel().createSection(
+                                sectionN = ((RhythmlBinding) this.getBinding()).getRhythmlModel().createSection(
                                         sectionName instanceof String ? sectionName : (String) sectionName,
                                         buildNoteList(noteList instanceof String ? noteList : (String) noteList, name)
                                 )
-                                sections.add(section)
+                                sections.add(sectionN)
                                 [section: closure]
                             }
                     ]
@@ -31,35 +32,70 @@ abstract class RhythmlBasescript extends Script {
     }
 
     static def buildNoteList(String notesString, String instrumentName) {
+        boolean isRepeated = false
+        boolean isClosed = true
+        List<Note> repeatedNotes = new ArrayList<>()
+
         String[] noteFakeList = notesString.split(" ")
         List<Note> noteList = new ArrayList<>()
         for (String item : noteFakeList) {
-            if (instrumentName == "Drums") {
-                String[] sameTimeNotes = item.split("\\+")
-                if (sameTimeNotes.length > 0) {
-                    item = ""
-                    for (int i = 0; i < sameTimeNotes.length; i++) {
-                        sameTimeNotes[i] = "[" + sameTimeNotes[i] + "]"
-                        if (i < sameTimeNotes.length - 1) {
-                            item += sameTimeNotes[i] + "+"
+            if (item == "(") {
+                if (!isRepeated) {
+                    isRepeated = true
+                    isClosed = false
+                } else {
+                    throw new Error("Already repeating notes")
+                }
+            } else if (item == ")") {
+                if (!isClosed) {
+                    isClosed = true
+                } else {
+                    throw new Error("Already closed repeating notes")
+                }
+            } else {
+                if (instrumentName == "Drums") {
+                    String[] sameTimeNotes = item.split("\\+")
+                    if (sameTimeNotes.length > 1) {
+                        item = ""
+                        for (int i = 0; i < sameTimeNotes.length; i++) {
+                            sameTimeNotes[i] = "[" + sameTimeNotes[i] + "]"
+                            if (i < sameTimeNotes.length - 1) {
+                                item += sameTimeNotes[i] + "+"
+                            } else {
+                                item += sameTimeNotes[i]
+                            }
+                        }
+                    } else {
+                        item = "[" + item + "]"
+                    }
+                }
+                String[] repeatNote = item.split("\\*")
+                if (repeatNote.length > 1) {
+                    def repetition = instrumentName == "Drums" ? Integer.valueOf(repeatNote[1].substring(0, repeatNote[1].length() - 1)) : Integer.valueOf(repeatNote[1])
+
+                    if (isRepeated && isClosed) {
+                        for (int i = 0; i < repetition; i++) {
+                            noteList.addAll(repeatedNotes)
+                        }
+                        repeatedNotes = new ArrayList<>()
+                        isRepeated = false
+                        isClosed = true
+                    } else {
+                        if (isRepeated) {
+                            repeatedNotes.get(repeatedNotes.size() - 1).setRepetition(repetition)
                         } else {
-                            item += sameTimeNotes[i]
+                            noteList.get(noteList.size() - 1).setRepetition(repetition)
                         }
                     }
                 } else {
-                    item = "[" + item + "]"
+                    if (isRepeated) {
+                        repeatedNotes.add(new Note(item, "i", 1))
+                    } else {
+                        noteList.add(new Note(item, "i", 1))
+                    }
                 }
-            }
-            String[] repeat = item.split("\\*")
-            if (repeat.length > 1) {
-                int repetition = 1
-                if (instrumentName == "Drums") {
-                    noteList.get(noteList.size() - 1).setRepetition(Integer.valueOf(repeat[1].substring(0, repeat[1].length() - 1)))
-                } else {
-                    noteList.get(noteList.size() - 1).setRepetition(Integer.valueOf(repeat[1]))
-                }
-            } else {
-                noteList.add(new Note(item, "i", 1))
+
+
             }
         }
         return noteList
