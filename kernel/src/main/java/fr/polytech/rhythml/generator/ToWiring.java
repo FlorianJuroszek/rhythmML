@@ -2,10 +2,13 @@ package fr.polytech.rhythml.generator;
 
 import fr.polytech.rhythml.Song;
 import fr.polytech.rhythml.logical.*;
+import fr.polytech.rhythml.logical.Instrument;
 import fr.polytech.rhythml.logical.Note;
+import fr.polytech.rhythml.logical.Track;
 import org.jfugue.Pattern;
 import org.jfugue.Player;
 
+import javax.sound.midi.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +19,9 @@ import java.util.List;
  */
 public class ToWiring extends Visitor<StringBuffer> {
 
-    private final Player player = new Player();
+    private Player player = new Player();
+
+    private int currentTrack = 0;
 
     /**
      * Key : name of the pattern given by the user
@@ -44,10 +49,20 @@ public class ToWiring extends Visitor<StringBuffer> {
 
         // Last step play pattern and generate midi file
         try {
+            Synthesizer synth = MidiSystem.getSynthesizer(); synth.open();
+            ClassLoader classLoader = getClass().getClassLoader();
+            Soundbank soundbank = MidiSystem.getSoundbank( new File(classLoader.getResource("gm.sf2").getFile()));
+            // Show whether the soundbank is supported
+            System.out.print("Is soundbank supported?"); System.out.println(synth.isSoundbankSupported(soundbank));
+            synth.loadAllInstruments(soundbank);
+
+            this.player = new Player(synth);
             player.play(songPattern);
             player.saveMidi(songPattern, new File(String.format("%s.midi", song.getName())));
             System.out.println(songPattern.toString());
-        } catch (IOException e) {
+
+            synth.close();
+        } catch (IOException | NullPointerException | MidiUnavailableException | InvalidMidiDataException e) {
             e.printStackTrace();
         }
     }
@@ -58,9 +73,28 @@ public class ToWiring extends Visitor<StringBuffer> {
 
         // For now we consider one pattern by track
         // Voice value will be set to 9 if the instrument is Drums
-        stringBuilder.append(
-                String.format("V%d ", track.getInstrument().value)
-        );
+        if (track.getInstrument().equals(Instrument.Drums)) {
+            stringBuilder.append(
+                    String.format("V%d ", 9)
+            );
+        } else {
+            int nextTrack = currentTrack == 8 ? currentTrack + 2 : currentTrack + 1;
+
+            if (nextTrack > 15) {
+                System.out.println("Error (too many channels defined)");
+            }
+
+            stringBuilder.append(
+                    String.format("V%d ", nextTrack)
+            );
+        }
+
+        // TODO move this logic in instrument and channel by counter
+        if (!track.getInstrument().equals(Instrument.Drums)) {
+            stringBuilder.append(
+                    String.format("I%d ", track.getInstrument().value)
+            );
+        }
 
         for (Section section : track.getSections()) {
             for (Note note : section.getNotes()) {
@@ -80,6 +114,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
         // MOCK
         stringBuilder.append(String.format("%d", patternList.size() + 1));
+        System.out.println(stringBuilder.toString());
         patternList.add(new Pattern(stringBuilder.toString()));
     }
 
