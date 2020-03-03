@@ -100,14 +100,26 @@ public class ToWiring extends Visitor<StringBuffer> {
             for (Note note : section.getNotes()) {
                 if (note.getRepetition() != null) {
                     for (int i = 0; i < note.getRepetition(); i++) {
+                        if (track.getInstrument().equals(Instrument.Drums)) {
+                            stringBuilder.append(
+                                    String.format("%s" + "i ", note.getName())
+                            );
+                        } else {
+                            stringBuilder.append(
+                                    String.format("%s ", note.getName())
+                            );
+                        }
+                    }
+                } else {
+                    if (track.getInstrument().equals(Instrument.Drums)) {
+                        stringBuilder.append(
+                                String.format("%s" + "i ", note.getName())
+                        );
+                    } else {
                         stringBuilder.append(
                                 String.format("%s ", note.getName())
                         );
                     }
-                } else {
-                    stringBuilder.append(
-                            String.format("%s ", note.getName())
-                    );
                 }
             }
         }
