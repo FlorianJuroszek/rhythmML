@@ -67,12 +67,12 @@ public class ToWiring extends Visitor<StringBuffer> {
                 if (note.getRepetition() != null) {
                     for (int i = 0; i < note.getRepetition(); i++) {
                         stringBuilder.append(
-                                String.format("%s%s ", note.getName(), note.getDuration())
+                                String.format("%s ", note.getName())
                         );
                     }
                 } else {
                     stringBuilder.append(
-                            String.format("%s%s ", note.getName(), note.getDuration())
+                            String.format("%s ", note.getName())
                     );
                 }
             }
