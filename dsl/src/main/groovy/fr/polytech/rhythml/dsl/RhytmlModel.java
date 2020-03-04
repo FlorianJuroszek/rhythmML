@@ -26,7 +26,6 @@ public class RhytmlModel {
     public void createTrack(String name, List<Section> sections) {
         Track track = new Track();
         track.setName(name);
-        track.setTempo(120);
         track.setSections(sections);
         track.setInstrument(Instrument.valueOf(name));
         this.trackList.add(track);

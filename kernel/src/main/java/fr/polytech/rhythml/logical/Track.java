@@ -9,7 +9,6 @@ import java.util.List;
 public class Track implements NamedElement, Visitable {
     private String name;
     private List<Section> sections;
-    private int tempo;
     private Instrument instrument;
 
     @Override
@@ -28,14 +27,6 @@ public class Track implements NamedElement, Visitable {
 
     public void setInstrument(Instrument instrument) {
         this.instrument = instrument;
-    }
-
-    public int getTempo() {
-        return tempo;
-    }
-
-    public void setTempo(int tempo) {
-        this.tempo = tempo;
     }
 
     public List<Section> getSections() {

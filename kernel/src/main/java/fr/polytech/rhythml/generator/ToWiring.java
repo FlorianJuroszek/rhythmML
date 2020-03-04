@@ -29,16 +29,17 @@ public class ToWiring extends Visitor<StringBuffer> {
      */
     private List<Pattern> patternList = new ArrayList<>();
 
+    private Song song;
+
     public ToWiring() {
         this.result = new StringBuffer();
     }
 
     public void visit(final Song song) {
         this.result = new StringBuffer();
-
+        this.song = song;
         // First step visit tracks
         for (Track track : song.getTracks()) {
-            track.setTempo(song.getTempo());
             track.accept(this);
         }
 
@@ -73,7 +74,7 @@ public class ToWiring extends Visitor<StringBuffer> {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(
-                String.format("T%d ", track.getTempo())
+                String.format("T%d ", song.getTempo())
         );
         // For now we consider one pattern by track
         // Voice value will be set to 9 if the instrument is Drums
