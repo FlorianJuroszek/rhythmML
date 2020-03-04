@@ -74,7 +74,7 @@ abstract class RhythmlBasescript extends Script {
                         item = "[" + item + "]"
                     }
                 }
-                String[] repeatNote = item.split("\\*")
+                String[] repeatNote = item.split("x")
                 if (repeatNote.length > 1) {
                     def repetition = instrumentName == "Drums" ? Integer.valueOf(repeatNote[1].substring(0, repeatNote[1].length() - 1)) : Integer.valueOf(repeatNote[1])
 
