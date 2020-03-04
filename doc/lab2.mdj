@@ -1370,7 +1370,7 @@
 											"top": 283,
 											"width": 86.72802734375,
 											"height": 13,
-											"text": "DRUMS 9",
+											"text": "Drums 9",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1387,7 +1387,58 @@
 											"top": 298,
 											"width": 86.72802734375,
 											"height": 13,
-											"text": "GUITARE 7",
+											"text": "Bass 32",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLEnumerationLiteralView",
+											"_id": "AAAAAAFwpd3bveh0UVk=",
+											"_parent": {
+												"$ref": "AAAAAAFwKYPPezh7b/w="
+											},
+											"model": {
+												"$ref": "AAAAAAFwpd3bruhuSlc="
+											},
+											"font": "Arial;13;0",
+											"left": 165,
+											"top": 313,
+											"width": 86.72802734375,
+											"height": 13,
+											"text": "Piano 0",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLEnumerationLiteralView",
+											"_id": "AAAAAAFwpd5Ksemwyg0=",
+											"_parent": {
+												"$ref": "AAAAAAFwKYPPezh7b/w="
+											},
+											"model": {
+												"$ref": "AAAAAAFwpd5Kp+mq/wI="
+											},
+											"font": "Arial;13;0",
+											"left": 165,
+											"top": 328,
+											"width": 86.72802734375,
+											"height": 13,
+											"text": "Trumpet 56",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLEnumerationLiteralView",
+											"_id": "AAAAAAFwpd5vfOosaTM=",
+											"_parent": {
+												"$ref": "AAAAAAFwKYPPezh7b/w="
+											},
+											"model": {
+												"$ref": "AAAAAAFwpd5vd+om3Es="
+											},
+											"font": "Arial;13;0",
+											"left": 165,
+											"top": 343,
+											"width": 86.72802734375,
+											"height": 13,
+											"text": "Violin 40",
 											"horizontalAlignment": 0
 										}
 									],
@@ -1395,7 +1446,7 @@
 									"left": 160,
 									"top": 278,
 									"width": 96.72802734375,
-									"height": 38
+									"height": 83
 								}
 							],
 							"font": "Arial;13;0",
@@ -1403,7 +1454,7 @@
 							"left": 160,
 							"top": 240,
 							"width": 96.72802734375,
-							"height": 76,
+							"height": 121,
 							"nameCompartment": {
 								"$ref": "AAAAAAFwKYPPezhy+GU="
 							},
@@ -2230,7 +2281,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFwFJ09yhmEPn0="
 							},
-							"name": "position"
+							"name": "position",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -2324,7 +2376,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFwKYPPeThvb0k="
 							},
-							"name": "DRUMS 9"
+							"name": "Drums 9"
 						},
 						{
 							"_type": "UMLEnumerationLiteral",
@@ -2332,7 +2384,31 @@
 							"_parent": {
 								"$ref": "AAAAAAFwKYPPeThvb0k="
 							},
-							"name": "GUITARE 7"
+							"name": "Bass 32"
+						},
+						{
+							"_type": "UMLEnumerationLiteral",
+							"_id": "AAAAAAFwpd3bruhuSlc=",
+							"_parent": {
+								"$ref": "AAAAAAFwKYPPeThvb0k="
+							},
+							"name": "Piano 0"
+						},
+						{
+							"_type": "UMLEnumerationLiteral",
+							"_id": "AAAAAAFwpd5Kp+mq/wI=",
+							"_parent": {
+								"$ref": "AAAAAAFwKYPPeThvb0k="
+							},
+							"name": "Trumpet 56"
+						},
+						{
+							"_type": "UMLEnumerationLiteral",
+							"_id": "AAAAAAFwpd5vd+om3Es=",
+							"_parent": {
+								"$ref": "AAAAAAFwKYPPeThvb0k="
+							},
+							"name": "Violin 40"
 						}
 					]
 				}
