@@ -10,19 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RhytmlModel {
+    private Song song;
     private List<Track> trackList;
     private Binding binding;
 
     public RhytmlModel(Binding binding) {
         this.trackList = new ArrayList<Track>();
         this.binding = binding;
+        this.song = new Song();
     }
+
+    public Song getSong() { return this.song; }
 
     public void createTrack(String name, List<Section> sections) {
         Track track = new Track();
         track.setName(name);
-        //FIXME manual for now but will change later
-        track.setBpm(120);
+        track.setTempo(120);
         track.setSections(sections);
         track.setInstrument(Instrument.valueOf(name));
         this.trackList.add(track);
@@ -36,18 +39,8 @@ public class RhytmlModel {
         return section;
     }
 
-    public Note createNote(String name, String beat, String quaver, String semiquaver) {
-        Note note = new Note();
-        note.setName(name);
-        /*note.setBeat(new NotePosition(beat));
-        note.setQuaver(new NotePosition(quaver));
-        note.setSemiquaver(new NotePosition(semiquaver));*/
-        return note;
-    }
-
     @SuppressWarnings("rawtypes")
     public Object generateCode(String songName) {
-        Song song = new Song();
         song.setName(songName);
         song.setTracks(this.trackList);
         Visitor codeGenerator = new ToWiring();

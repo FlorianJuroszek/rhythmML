@@ -2,7 +2,6 @@ package fr.polytech.rhythml;
 
 import fr.polytech.rhythml.generator.Visitable;
 import fr.polytech.rhythml.generator.Visitor;
-import fr.polytech.rhythml.logical.Section;
 import fr.polytech.rhythml.logical.Track;
 
 import java.util.List;
@@ -14,10 +13,19 @@ public class
 Song implements NamedElement, Visitable {
 
     private String name;
+    private int tempo;
     private List<Track> tracks;
 
     public void accept(final Visitor visitor) {
         visitor.visit(this);
+    }
+
+    public int getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(int tempo) {
+        this.tempo = tempo;
     }
 
     public void setName(final String name) {

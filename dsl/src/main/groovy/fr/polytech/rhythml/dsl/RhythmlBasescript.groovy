@@ -10,6 +10,10 @@ abstract class RhythmlBasescript extends Script {
         this.songName = name
     }
 
+    def tempo(Integer value) {
+        ((RhythmlBinding) this.getBinding()).getRhythmlModel().getSong().setTempo(value instanceof String ? Integer.valueOf(value) : value)
+    }
+
     def instrument(String name) {
         List<Section> sections = new ArrayList<>()
         ((RhythmlBinding) this.getBinding()).getRhythmlModel().createTrack(name, sections)
@@ -100,11 +104,6 @@ abstract class RhythmlBasescript extends Script {
             }
         }
         return noteList
-    }
-
-// export name
-    def export(String name) {
-        println(((RhythmlBinding) this.getBinding()).getRhythmlModel().generateCode(name).toString())
     }
 
     def play() {

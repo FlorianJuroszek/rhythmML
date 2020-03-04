@@ -38,6 +38,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
         // First step visit tracks
         for (Track track : song.getTracks()) {
+            track.setTempo(song.getTempo());
             track.accept(this);
         }
 
@@ -71,6 +72,9 @@ public class ToWiring extends Visitor<StringBuffer> {
     public void visit(Track track) {
         StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append(
+                String.format("T%d ", track.getTempo())
+        );
         // For now we consider one pattern by track
         // Voice value will be set to 9 if the instrument is Drums
         if (track.getInstrument().equals(Instrument.Drums)) {

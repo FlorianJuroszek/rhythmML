@@ -9,7 +9,7 @@ import java.util.List;
 public class Track implements NamedElement, Visitable {
     private String name;
     private List<Section> sections;
-    private float bpm;
+    private int tempo;
     private Instrument instrument;
 
     @Override
@@ -30,12 +30,12 @@ public class Track implements NamedElement, Visitable {
         this.instrument = instrument;
     }
 
-    public float getBpm() {
-        return bpm;
+    public int getTempo() {
+        return tempo;
     }
 
-    public void setBpm(float bpm) {
-        this.bpm = bpm;
+    public void setTempo(int tempo) {
+        this.tempo = tempo;
     }
 
     public List<Section> getSections() {
