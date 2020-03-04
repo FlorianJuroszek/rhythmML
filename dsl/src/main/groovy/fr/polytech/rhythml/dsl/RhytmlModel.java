@@ -18,6 +18,7 @@ public class RhytmlModel {
         this.trackList = new ArrayList<Track>();
         this.binding = binding;
         this.song = new Song();
+        this.song.setTempo(120);
     }
 
     public Song getSong() { return this.song; }
