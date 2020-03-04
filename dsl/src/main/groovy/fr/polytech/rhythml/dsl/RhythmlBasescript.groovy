@@ -4,9 +4,10 @@ import fr.polytech.rhythml.logical.Note
 import fr.polytech.rhythml.logical.Section
 
 abstract class RhythmlBasescript extends Script {
+    private String songName;
 
     def song(String name) {
-
+        this.songName = name
     }
 
     def instrument(String name) {
@@ -104,6 +105,10 @@ abstract class RhythmlBasescript extends Script {
 // export name
     def export(String name) {
         println(((RhythmlBinding) this.getBinding()).getRhythmlModel().generateCode(name).toString())
+    }
+
+    def play() {
+        println(((RhythmlBinding) this.getBinding()).getRhythmlModel().generateCode(this.songName).toString())
     }
 
 // disable run method while running
