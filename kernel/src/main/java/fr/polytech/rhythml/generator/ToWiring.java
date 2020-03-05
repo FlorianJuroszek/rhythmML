@@ -57,8 +57,8 @@ public class ToWiring extends Visitor<StringBuffer> {
             synth.loadAllInstruments(soundbank);
 
             this.player = new Player(synth);
-            player.play(songPattern);
             player.saveMidi(songPattern, new File(String.format("%s.midi", song.getName())));
+            player.play(songPattern);
 
             synth.close();
         } catch (IOException | NullPointerException | MidiUnavailableException | InvalidMidiDataException e) {
