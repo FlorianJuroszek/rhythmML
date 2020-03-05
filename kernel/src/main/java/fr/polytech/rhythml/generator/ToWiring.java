@@ -54,14 +54,11 @@ public class ToWiring extends Visitor<StringBuffer> {
             Synthesizer synth = MidiSystem.getSynthesizer(); synth.open();
             ClassLoader classLoader = getClass().getClassLoader();
             Soundbank soundbank = MidiSystem.getSoundbank( new File(classLoader.getResource("gm.sf2").getFile()));
-            // Show whether the soundbank is supported
-            System.out.print("Is soundbank supported?"); System.out.println(synth.isSoundbankSupported(soundbank));
             synth.loadAllInstruments(soundbank);
 
             this.player = new Player(synth);
             player.play(songPattern);
             player.saveMidi(songPattern, new File(String.format("%s.midi", song.getName())));
-            System.out.println(songPattern.toString());
 
             synth.close();
         } catch (IOException | NullPointerException | MidiUnavailableException | InvalidMidiDataException e) {
